@@ -48,8 +48,9 @@ def borrar_calificacion_por_idAlumno(sesion:Session, id_al:int):
     print("Borrando calificacion por id del alumno")
     alm=calificacion_por_idAlumno(sesion, id_al) #Llamamos a funcion
     if alm is not None:
-        sesion.delete(alm)
-        sesion.commit()
+        for calificaciones_alumno in alm:
+            sesion.delete(calificaciones_alumno)
+            sesion.commit()
     respuesta={
         "mensaje":"calificacion borrada por id_Alumno"
     }
@@ -72,16 +73,39 @@ def foto_por_idAlumno(sesion:Session, id_al:int):
     print("Devolviendo foto por id_alumno")
     return sesion.query(modelos.Foto).filter(modelos.Foto.id_alumno==id_al).all()
 
-#-----DELETE------
+#-------------DELETES--------------
 #DELETE FROM app.fotos WHERE id_alumnos={id_al}
 def borrar_foto_por_idAlumno(sesion:Session ,id_al:int):
     print("Borrando foto por idAlumno")
     alm=foto_por_idAlumno(sesion, id_al) #llamamos a la funcion
     if alm is not None:
-        sesion.delete(alm)
-        sesion.commit()
+        for fotos_alumno in alm:
+            sesion.delete(fotos_alumno)
+            sesion.commit()
     respuesta={
         "mensaje":"Se ha eliminado la foto"
     }
     return respuesta
+#delete from app.fotos where id_foto=id
+def borrar_foto_por_iD(sesion:Session, id:int):
+    print("Borrando foto por Id")
+    alm=foto_por_id(sesion, id)
+    if alm is not None:
+        sesion.delete(alm)
+        sesion.query()
 
+    respuesta={
+        "mensaje":"Se ha eliminado la foto"
+    }
+    
+
+def borrar_calif_por_iD(sesion:Session, id:int):
+    print("Borrando calificacion por id")
+    alm=calificacion_por_id(sesion,id)
+    if alm is not None:
+        sesion.delete(alm)
+        sesion.query()
+    respuesta={
+        "mensaje":"Se ha eliminado la calificacion por Id"
+    }
+    
