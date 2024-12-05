@@ -11,7 +11,7 @@ def devuelve_alumnos(sesion:Session):
 #SELECT * FROM app.alumnos WHERE id={id_al}
 def alumno_por_id(sesion:Session, id_al:int):
     print("Devolviendo alumno por id")
-    return sesion.query(modelos.Alumno).filter(modelos.Alumno.id==id_al).firts()
+    return sesion.query(modelos.Alumno).filter(modelos.Alumno.id==id_al).first()
 
 #-----DELETE------
 #DELETE FROM app.alumnos WHERE id_alumnos={id_al}
@@ -40,7 +40,7 @@ def calificacion_por_id(sesion:Session, id_calificacion:int):
 #SELECT * FROM app.calificaciones WHERE id_alumnos={id_al}
 def calificacion_por_idAlumno(sesion:Session, id_al:int):
     print("Devolviendo calificacion por Id_Alumno")
-    return sesion.query(modelos.Calificacion).filter(modelos.Calificacion.id_alumno==id_al).first()
+    return sesion.query(modelos.Calificacion).filter(modelos.Calificacion.id_alumno==id_al).all()
 
 #-----DELETE------
 #DELETE FROM app.calificaciones WHERE id_alumnos={id_al}
@@ -64,13 +64,13 @@ def devuelve_fotos(sesion:Session):
 
 #SELECT * FROM app.fotos WHERE id={id_fo}
 def foto_por_id(sesion:Session, id_foto):
-    print("Devolviendo foto por if")
+    print("Devolviendo foto por id")
     return sesion.query(modelos.Foto).filter(modelos.Foto.id==id_foto).first()
 
 #SELECT * FROM app.fotos WHERE id_alumnos={id_al}
 def foto_por_idAlumno(sesion:Session, id_al:int):
     print("Devolviendo foto por id_alumno")
-    return sesion.query(modelos.Foto).filter(modelos.Foto.id_alumno==id_al).first()
+    return sesion.query(modelos.Foto).filter(modelos.Foto.id_alumno==id_al).all()
 
 #-----DELETE------
 #DELETE FROM app.fotos WHERE id_alumnos={id_al}
@@ -78,7 +78,7 @@ def borrar_foto_por_idAlumno(sesion:Session ,id_al:int):
     print("Borrando foto por idAlumno")
     alm=foto_por_idAlumno(sesion, id_al) #llamamos a la funcion
     if alm is not None:
-        sesion.delete(id_al)
+        sesion.delete(alm)
         sesion.commit()
     respuesta={
         "mensaje":"Se ha eliminado la foto"
