@@ -29,3 +29,4 @@ class Foto(BaseClass):
     descripcion=Column(String(100))
     ruta=Column(String(100))
     
+#terminado

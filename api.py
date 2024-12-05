@@ -96,3 +96,4 @@ def borrar_alumno_porId(id:int, sesion:Session=Depends(generador_sesion)):
     repo.borrar_por_idAlumno(sesion,id)
     return {"Alumno_borrado", "yupi"}
 
+#terminado:)
