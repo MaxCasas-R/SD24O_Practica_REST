@@ -1,6 +1,9 @@
 from orm.config import BaseClass
 from sqlalchemy import Column, DateTime, String, Integer, ForeignKey
 import datetime
+from sqlalchemy.ext.declarative import declarative_base
+
+BaseClass=declarative_base()
 
 class Alumno(BaseClass):
     __tablename__="alumnos" #Nombre de la tabla
